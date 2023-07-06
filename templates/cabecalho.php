@@ -1,3 +1,8 @@
+<?php
+require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,13 +26,26 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/carrinho/index.php">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/carrinho/views/carrinho.php"><i class="bi bi-cart4"></i></a>
+                        <a class="nav-link active" aria-current="page" href="/carrinho/views/carrinho.php">Carrinho<i class="bi bi-cart4"></i></a>
                     </li>
+                    <?php if (!isset($_SESSION['usuario'])) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/carrinho/views/login.php">Login<i class="bi bi-door-open-fill"></i></a>
+                        </li>
+                    <?php else : ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/carrinho/controllers/logout_controller.php">Sair<i class="bi bi-door-closed-fill"></i></a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <span>Bem Vindo, <?= $_SESSION['usuario']['nome'] ?></span>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
