@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 ?>
 
 <section class="d-flex align-items-center py-4">
-    <div class="form-signin w-25 m-auto">
+    <div class="form-signin col-8 col-lg-4 m-auto">
         <form action="/carrinho/controllers/cria_produto_controller.php" method="POST" enctype="multipart/form-data">
             <h1 class="h3 mb-3 fw-normal">Cadastrar Produto</h1>
 

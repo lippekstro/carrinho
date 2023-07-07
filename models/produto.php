@@ -55,6 +55,17 @@ class Produto
 
     public function editar()
     {
+        $query = "UPDATE produto SET nome_produto = :nome_produto, preco = :preco WHERE id_produto = :id_produto";
+        $conexao = Conexao::conectar();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(":nome_produto", $this->nome_produto);
+        $stmt->bindValue(":preco", $this->preco);
+        $stmt->bindValue(":id_produto", $this->id_produto);
+        $stmt->execute();
+    }
+
+    public function editarImagem()
+    {
         $query = "UPDATE produto SET nome_produto = :nome_produto, preco = :preco, img_produto = :img_produto WHERE id_produto = :id_produto";
         $conexao = Conexao::conectar();
         $stmt = $conexao->prepare($query);

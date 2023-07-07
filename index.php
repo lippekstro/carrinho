@@ -16,7 +16,7 @@ try {
 <?php endif; ?>
 
 <div class="d-flex justify-content-center m-3">
-    <div id="carouselExampleCaptions" class="carousel slide w-50">
+    <div id="carouselExampleCaptions" class="carousel slide col col-lg-6">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -58,7 +58,7 @@ try {
 
 <div class="d-flex justify-content-evenly flex-wrap m-3">
     <?php foreach($produtos as $p): ?>
-    <div class="card" style="width: 18rem;">
+    <div class="card m-3" style="width: 18rem;">
         <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode($p['img_produto']); ?>" class="card-img-top" alt="...">
         <div class="card-body">
             <p class="card-text"><?= $p['nome_produto'] ?></p>

@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 
 
 <section class="d-flex align-items-center py-4">
-    <div class="form-signin w-25 m-auto">
+    <div class="form-signin col-8 col-lg-4 m-auto">
         <?php if (isset($_COOKIE['erro'])) : ?>
             <p class="text-danger text-center"><?= $_COOKIE['erro'] ?></p>
             <?php setcookie('erro', '', time() - 3600, '/') ?>
