@@ -16,6 +16,7 @@ try {
     }
     $produto->criar();
 
+    setcookie('sucesso', "O produto $produto->nome_produto foi adicionado com sucesso", time() + 3600, '/');
     header("Location: /carrinho/views/admin/painel_controle.php");
     exit();
 } catch (PDOException $e) {

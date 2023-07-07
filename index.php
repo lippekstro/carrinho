@@ -11,7 +11,7 @@ try {
 ?>
 
 <?php if (isset($_COOKIE['adicionado'])) : ?>
-    <p class="text-success text-center"><?= $_COOKIE['adicionado'] ?></p>
+    <p class="text-success text-center m-3"><?= $_COOKIE['adicionado'] ?></p>
     <?php setcookie('adicionado', '', time() - 3600, '/') ?>
 <?php endif; ?>
 
