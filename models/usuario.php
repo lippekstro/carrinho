@@ -94,6 +94,7 @@ class Usuario
         if ($stmt->rowCount() > 0 && password_verify($senha, $registro['senha'])) {
             $_SESSION['usuario']['nome'] = $registro['nome_usuario'];
             $_SESSION['usuario']['email'] = $registro['email'];
+            $_SESSION['usuario']['nv_acesso'] = $registro['nv_acesso'];
             $_SESSION['usuario']['inicio'] = time();
             $_SESSION['usuario']['expira'] = 900;
 

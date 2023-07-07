@@ -3,9 +3,9 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/models/usuario.php";
 session_start();
 
 try {
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
+    $nome = htmlspecialchars($_POST['nome']);
+    $email = htmlspecialchars($_POST['email']);
+    $senha = htmlspecialchars($_POST['senha']);
     $senha = password_hash($senha, PASSWORD_DEFAULT);
     if (!empty($_FILES['imagem']['tmp_name'])) {
         $imagem = file_get_contents($_FILES['imagem']['tmp_name']);

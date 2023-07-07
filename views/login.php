@@ -13,11 +13,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
             <h1 class="h3 mb-3 fw-normal">Login</h1>
 
             <div class="form-floating my-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="nome@exemplo.com" name="email">
+                <input type="email" class="form-control" id="floatingInput" placeholder="nome@exemplo.com" name="email" required>
                 <label for="floatingInput">Email</label>
             </div>
             <div class="form-floating my-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Senha" name="senha">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Senha" name="senha" required>
                 <label for="floatingPassword">Senha</label>
             </div>
 

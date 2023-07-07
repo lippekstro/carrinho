@@ -1,6 +1,19 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/models/produto.php';
+
+try {
+    $produtos = Produto::listar();
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
+
 ?>
+
+<?php if (isset($_COOKIE['adicionado'])) : ?>
+    <p class="text-success text-center"><?= $_COOKIE['adicionado'] ?></p>
+    <?php setcookie('adicionado', '', time() - 3600, '/') ?>
+<?php endif; ?>
 
 <div class="d-flex justify-content-center m-3">
     <div id="carouselExampleCaptions" class="carousel slide w-50">
@@ -44,14 +57,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 </div>
 
 <div class="d-flex justify-content-evenly flex-wrap m-3">
-<div class="card" style="width: 18rem;">
-    <img src="https://source.unsplash.com/random/1920x1080/?sunglasses" class="card-img-top" alt="...">
-    <div class="card-body">
-        <p class="card-text">Oculos de Sol.</p>
-        <p class="card-text">100R$</p>
-        <a href="#" class="btn btn-primary">Carrinho</a>
+    <?php foreach($produtos as $p): ?>
+    <div class="card" style="width: 18rem;">
+        <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode($p['img_produto']); ?>" class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text"><?= $p['nome_produto'] ?></p>
+            <p class="card-text"><?= $p['preco'] ?>R$</p>
+            <a href="/carrinho/controllers/adicionar_item_controller.php?id=<?= $p['id_produto'] ?>" class="btn btn-primary">Carrinho</a>
+        </div>
     </div>
-</div>
+    <?php endforeach; ?>
 
 </div>
 

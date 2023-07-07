@@ -27,12 +27,18 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav align-items-center">
+                    <?php if (isset($_SESSION['usuario'])) : ?>
+                        <li class="nav-item">
+                            <span>Bem Vindo, <?= $_SESSION['usuario']['nome'] ?></span>
+                        </li>
+                    <?php endif; ?>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/carrinho/index.php">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="/carrinho/index.php">Inicio<i class="bi bi-house-fill"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/carrinho/views/carrinho.php">Carrinho<i class="bi bi-cart4"></i></a>
                     </li>
+
                     <?php if (!isset($_SESSION['usuario'])) : ?>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/carrinho/views/login.php">Login<i class="bi bi-door-open-fill"></i></a>
@@ -41,9 +47,11 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/carrinho/controllers/logout_controller.php">Sair<i class="bi bi-door-closed-fill"></i></a>
                         </li>
-                        
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['nv_acesso'] >= 2) : ?>
                         <li class="nav-item">
-                            <span>Bem Vindo, <?= $_SESSION['usuario']['nome'] ?></span>
+                            <a class="nav-link active" aria-current="page" href="/carrinho/views/admin/painel_controle.php">Painel de Controle<i class="bi bi-person-badge-fill"></i></a>
                         </li>
                     <?php endif; ?>
                 </ul>
