@@ -4,6 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/models/produto.php';
 
 try {
     $produtos = Produto::listar();
+    $produtosNovos = Produto::listarUltimos();
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
@@ -23,14 +24,16 @@ try {
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
+            <?php foreach ($produtosNovos as $pn) : ?>
             <div class="carousel-item active">
-                <img src="https://source.unsplash.com/random/1920x1080/?shirt" class="d-block w-100" alt="...">
+                <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode($pn['img_produto']); ?>" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Camisas</h5>
                     <p>As melhores camisas de marca.</p>
                 </div>
             </div>
-            <div class="carousel-item">
+            <?php endforeach; ?>
+            <!-- <div class="carousel-item">
                 <img src="https://source.unsplash.com/random/1920x1080/?pants" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Calças</h5>
@@ -43,7 +46,7 @@ try {
                     <h5>Botas</h5>
                     <p>Vaqueira.</p>
                 </div>
-            </div>
+            </div> -->
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

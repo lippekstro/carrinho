@@ -1,8 +1,16 @@
 <?php
+require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/models/produto.php";
 
 $produtoId = $_GET['id'];
 
-// Verificar se o carrinho já existe nos cookies
+try {
+    $produto = new Produto($produtoId);
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
+
+
+ // Verificar se o carrinho já existe nos cookies
 if (isset($_COOKIE['carrinho'])) {
     // Recuperar o conteúdo atual do carrinho
     $carrinho = json_decode($_COOKIE['carrinho'], true);

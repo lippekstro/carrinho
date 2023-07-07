@@ -53,6 +53,16 @@ class Produto
         return $lista;
     }
 
+    public static function listarUltimos()
+    {
+        $query = "SELECT * FROM produto ORDER BY id_produto DESC LIMIT 3";
+        $conexao = Conexao::conectar();
+        $stmt = $conexao->prepare($query);
+        $stmt->execute();
+        $lista = $stmt->fetchAll();
+        return $lista;
+    }
+
     public function editar()
     {
         $query = "UPDATE produto SET nome_produto = :nome_produto, preco = :preco WHERE id_produto = :id_produto";
