@@ -1,5 +1,12 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
+
+$qtd = 0;
+if (isset($_COOKIE['carrinho'])) {
+    foreach (unserialize($_COOKIE['carrinho']) as $p) {
+        $qtd += $p['quantidade'];
+    }
+}
 ?>
 
 
@@ -28,39 +35,45 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav align-items-center w-100 justify-content-between">
                     <div class="navbar-nav align-items-center">
-                    <?php if (isset($_SESSION['usuario'])) : ?>
+                        <?php if (isset($_SESSION['usuario'])) : ?>
+                            <li class="nav-item">
+                                <span>Bem Vindo, <?= $_SESSION['usuario']['nome'] ?></span>
+                            </li>
+                        <?php endif; ?>
                         <li class="nav-item">
-                            <span>Bem Vindo, <?= $_SESSION['usuario']['nome'] ?></span>
+                            <a class="nav-link active" aria-current="page" href="/carrinho/index.php">Inicio<i class="bi bi-house-fill"></i></a>
                         </li>
-                    <?php endif; ?>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/carrinho/index.php">Inicio<i class="bi bi-house-fill"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/carrinho/views/carrinho.php">Carrinho<i class="bi bi-cart4"></i></a>
-                    </li>
-
-                    <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['nv_acesso'] >= 2) : ?>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/carrinho/views/admin/painel_controle.php">Painel de Controle<i class="bi bi-person-badge-fill"></i></a>
+                            <a class="nav-link active" aria-current="page" href="/carrinho/views/carrinho.php">
+                                Carrinho
+                                <i class="bi bi-cart4"></i>
+                                <?php if (isset($_COOKIE['carrinho'])) : ?>
+                                    <span class="badge text-bg-secondary"><?= $qtd ?></span>
+                                <?php endif; ?>
+                            </a>
                         </li>
-                    <?php endif; ?>
 
-                    
+                        <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['nv_acesso'] >= 2) : ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/carrinho/views/admin/painel_controle.php">Painel de Controle<i class="bi bi-person-badge-fill"></i></a>
+                            </li>
+                        <?php endif; ?>
+
+
                     </div>
 
                     <div class="navbar-nav align-items-center">
-                    <?php if (!isset($_SESSION['usuario'])) : ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/carrinho/views/login.php">Login<i class="bi bi-door-open-fill"></i></a>
-                        </li>
-                    <?php else : ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/carrinho/controllers/logout_controller.php">Sair<i class="bi bi-door-closed-fill"></i></a>
-                        </li>
-                    <?php endif; ?>            
+                        <?php if (!isset($_SESSION['usuario'])) : ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/carrinho/views/login.php">Login<i class="bi bi-door-open-fill"></i></a>
+                            </li>
+                        <?php else : ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/carrinho/controllers/logout_controller.php">Sair<i class="bi bi-door-closed-fill"></i></a>
+                            </li>
+                        <?php endif; ?>
                     </div>
-                    
+
                 </ul>
             </div>
         </div>

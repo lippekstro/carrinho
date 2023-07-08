@@ -15,8 +15,8 @@ campoCep.addEventListener('change', () => {
             // Atualizando os campos com os valores recebidos
             document.getElementById('logradouro').value = data.logradouro;
             document.getElementById('bairro').value = data.bairro;
-           /* document.getElementById('cidade').value = data.localidade;
-            document.getElementById('estado').value = data.uf; */
+            document.getElementById('cidade').value = data.localidade;
+           /* document.getElementById('estado').value = data.uf; */
         } else {
             // Erro na solicitação
             console.error('Erro na solicitação. Status:', request.status);

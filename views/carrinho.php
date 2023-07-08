@@ -33,7 +33,7 @@ $total = 0;
                 <div class="col-md-5 col-lg-4 order-md-last">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-primary">Seu Carrinho</span>
-                        <span class="badge bg-primary rounded-pill"><?= count($carrinho); ?></span>
+                        <span class="badge bg-primary rounded-pill"><?= $qtd ?></span>
                     </h4>
                     <ul class="list-group mb-3">
                         <?php foreach ($produtos as $p => $i) : ?>
@@ -86,7 +86,7 @@ $total = 0;
                                 </div>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-sm-12">
                                 <label for="email" class="form-label">Email </label>
                                 <input type="email" class="form-control" id="email" placeholder="voce@exemplo.com">
                                 <div class="invalid-feedback">
@@ -94,7 +94,7 @@ $total = 0;
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-sm-12 col-md-3">
                                 <label for="zip" class="form-label">CEP</label>
                                 <input type="text" class="form-control" id="zip" placeholder="12345678" maxlength="8" required>
                                 <div class="invalid-feedback">
@@ -102,7 +102,7 @@ $total = 0;
                                 </div>
                             </div>
 
-                            <div class="col-9">
+                            <div class="col-sm-12 col-md-6">
                                 <label for="logradouro" class="form-label">Endereço</label>
                                 <input type="text" class="form-control" id="logradouro" placeholder="Rua Principal, 10" required>
                                 <div class="invalid-feedback">
@@ -110,7 +110,20 @@ $total = 0;
                                 </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-sm-12 col-md-3">
+                                <label for="numero" class="form-label">Numero</label>
+                                <input type="text" class="form-control" id="numero" placeholder="S/N" required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-9">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" id="cidade" placeholder="Sao Luis" required>
+                                <div class="invalid-feedback">
+                                    Por favor escreva seu bairro de entrega.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
                                 <label for="bairro" class="form-label">Bairro</label>
                                 <input type="text" class="form-control" id="bairro" placeholder="Centro" required>
                                 <div class="invalid-feedback">
@@ -118,7 +131,7 @@ $total = 0;
                                 </div>
                             </div>
 
-                            <div class="col-9">
+                            <div class="col-12">
                                 <label for="address2" class="form-label">Endereço 2 <span class="text-body-secondary">(Optional)</span></label>
                                 <input type="text" class="form-control" id="address2" placeholder="Apartamento ou suite">
                             </div>
@@ -183,7 +196,7 @@ $total = 0;
 
                             <div class="col-md-3">
                                 <label for="cc-cvv" class="form-label">CVV</label>
-                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                <input type="text" class="form-control" id="cc-cvv" maxlength="3" placeholder="" required>
                                 <div class="invalid-feedback">
                                     CVV é obrigatório.
                                 </div>
@@ -200,7 +213,9 @@ $total = 0;
     </div>
 <?php endif; ?>
 
-<script src="/carrinho/js/viacep.js"></script>
+<?php if (isset($_COOKIE['carrinho'])) : ?>
+    <script src="/carrinho/js/viacep.js"></script>
+<?php endif; ?>
 
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/rodape.php';
