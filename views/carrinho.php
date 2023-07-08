@@ -3,16 +3,18 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/models/produto.php';
 
 if (isset($_COOKIE['carrinho'])) {
-    $carrinho = json_decode($_COOKIE['carrinho'], true);
+    $carrinho = unserialize($_COOKIE['carrinho']);
 
     $produtos = array();
 
     foreach ($carrinho as $item) {
-        $produtos[] = new Produto($item);
+        $produto = new Produto($item['id_produto']);
+        $produto->quantidade = $item['quantidade'];
+        $produtos[] = $produto;
     }
 }
 
-
+$total = 0;
 ?>
 
 <?php if (!isset($_COOKIE['carrinho'])) : ?>
@@ -37,22 +39,23 @@ if (isset($_COOKIE['carrinho'])) {
                         <?php foreach ($produtos as $p => $i) : ?>
                             <li class="list-group-item d-flex justify-content-between lh-sm">
                                 <div>
-                                    <h6 class="my-0"><?= $i->nome_produto ?></h6>
+                                    <h6 class="my-0"><?= $i->nome_produto ?> x <?= $i->quantidade ?></h6>
                                 </div>
-                                <span class="text-body-secondary"><?= $i->preco ?>R$</span>
+                                <span class="text-body-secondary"><?= $i->preco * $i->quantidade ?>R$</span>
                             </li>
+                            <?php $total += $i->preco * $i->quantidade?>    
                         <?php endforeach; ?>
 
-                        <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
+                        <!-- <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
                             <div class="text-success">
                                 <h6 class="my-0">Promo code</h6>
                                 <small>EXAMPLECODE</small>
                             </div>
                             <span class="text-success">−$5</span>
-                        </li>
+                        </li> -->
                         <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (USD)</span>
-                            <strong>$20</strong>
+                            <span>Total</span>
+                            <strong><?= $total ?>R$</strong>
                         </li>
                     </ul>
 

@@ -8,6 +8,8 @@ class Produto
     public $preco;
     public $img_produto;
 
+    public $quantidade; //nao vai pro banco, so para controlar os cookies
+
     public function __construct($id_produto = false)
     {
         if ($id_produto) {

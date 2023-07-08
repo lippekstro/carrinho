@@ -1,28 +1,37 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/models/produto.php";
+// Verifica se o ID do produto foi fornecido
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $produtoId = $_GET['id'];
 
-$produtoId = $_GET['id'];
+    try {
+        $produto = new Produto($produtoId);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
 
-try {
-    $produto = new Produto($produtoId);
-} catch (PDOException $e) {
-    echo $e->getMessage();
+    if ($produto) {
+        // Verifica se o carrinho já possui o produto
+        $carrinho = isset($_COOKIE['carrinho']) ? unserialize($_COOKIE['carrinho']) : array();
+
+        if (isset($carrinho[$produtoId])) {
+            // Atualiza a quantidade do produto no carrinho
+            $carrinho[$produtoId]['quantidade']++;
+        } else {
+            // Adiciona um novo item ao carrinho
+            $carrinho[$produtoId] = array(
+                'id_produto' => $produto->id_produto,
+                'nome' => $produto->nome_produto,
+                'preco' => $produto->preco,
+                'quantidade' => 1
+            );
+        }
+
+        // Salva o carrinho como cookie
+        setcookie('carrinho', serialize($carrinho), time() + (86400 * 30), '/');
+
+        setcookie('adicionado', "O produto foi adicionado ao carrinho com sucesso!", time() + 3600, '/');
+        header('Location: /carrinho/index.php');
+        exit();
+    }
 }
-
-
- // Verificar se o carrinho já existe nos cookies
-if (isset($_COOKIE['carrinho'])) {
-    // Recuperar o conteúdo atual do carrinho
-    $carrinho = json_decode($_COOKIE['carrinho'], true);
-} else {
-    // Se o carrinho não existir, criar um carrinho vazio
-    $carrinho = array();
-}
-
-// Adicionar o produto ao carrinho
-$carrinho[$produtoId] = isset($carrinho[$produtoId]) ? $carrinho[$produtoId] + 1 : 1;
-
-// Atualizar o cookie de carrinho com o novo conteúdo
-setcookie('carrinho', json_encode($carrinho), time() + (86400 * 30), '/'); // Definir cookie com validade de 30 dias (86400 segundos = 1 dia)
-setcookie('adicionado', "O produto foi adicionado ao carrinho com sucesso!", time() + 3600, '/');
-header('Location: /carrinho/index.php');
