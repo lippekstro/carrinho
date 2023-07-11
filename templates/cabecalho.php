@@ -94,11 +94,11 @@ if (isset($_COOKIE['carrinho'])) {
                             </form>
                         <?php endif; ?>
                         <?php if (!isset($_SESSION['usuario'])) : ?>
-                            <li class="nav-item">
+                            <li class="nav-item" style="min-width: fit-content;">
                                 <a class="nav-link active" aria-current="page" href="/carrinho/views/login.php">Login<i class="bi bi-door-open-fill"></i></a>
                             </li>
                         <?php else : ?>
-                            <li class="nav-item">
+                            <li class="nav-item" style="min-width: fit-content;">
                                 <a class="nav-link active" aria-current="page" href="/carrinho/controllers/logout_controller.php">Sair<i class="bi bi-door-closed-fill"></i></a>
                             </li>
                         <?php endif; ?>
