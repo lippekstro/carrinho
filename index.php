@@ -12,7 +12,9 @@ try {
 ?>
 
 <?php if (isset($_COOKIE['adicionado'])) : ?>
-    <p class="text-success text-center m-3"><?= $_COOKIE['adicionado'] ?></p>
+    <div class="alert alert-success text-center m-3" role="alert">
+        <?= $_COOKIE['adicionado'] ?>
+    </div>
     <?php setcookie('adicionado', '', time() - 3600, '/') ?>
 <?php endif; ?>
 
@@ -25,13 +27,13 @@ try {
         </div>
         <div class="carousel-inner">
             <?php foreach ($produtosNovos as $pn) : ?>
-            <div class="carousel-item active">
-                <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode($pn['img_produto']); ?>" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Camisas</h5>
-                    <p>As melhores camisas de marca.</p>
+                <div class="carousel-item active">
+                    <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode($pn['img_produto']); ?>" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Camisas</h5>
+                        <p>As melhores camisas de marca.</p>
+                    </div>
                 </div>
-            </div>
             <?php endforeach; ?>
             <!-- <div class="carousel-item">
                 <img src="https://source.unsplash.com/random/1920x1080/?pants" class="d-block w-100" alt="...">
@@ -60,15 +62,15 @@ try {
 </div>
 
 <div class="d-flex justify-content-evenly flex-wrap m-3">
-    <?php foreach($produtos as $p): ?>
-    <div class="card m-3" style="width: 18rem;">
-        <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode($p['img_produto']); ?>" class="card-img-top" alt="...">
-        <div class="card-body">
-            <p class="card-text"><?= $p['nome_produto'] ?></p>
-            <p class="card-text"><?= $p['preco'] ?>R$</p>
-            <a href="/carrinho/controllers/adicionar_item_controller.php?id=<?= $p['id_produto'] ?>" class="btn btn-primary">Carrinho</a>
+    <?php foreach ($produtos as $p) : ?>
+        <div class="card m-3" style="width: 18rem;">
+            <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode($p['img_produto']); ?>" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text"><?= $p['nome_produto'] ?></p>
+                <p class="card-text"><?= $p['preco'] ?>R$</p>
+                <a href="/carrinho/controllers/adicionar_item_controller.php?id=<?= $p['id_produto'] ?>" class="btn btn-primary">Carrinho</a>
+            </div>
         </div>
-    </div>
     <?php endforeach; ?>
 
 </div>

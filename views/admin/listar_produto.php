@@ -11,7 +11,9 @@ try {
 
 <section>
     <?php if (isset($_COOKIE['sucesso'])) : ?>
-        <p class="text-success text-center m-3"><?= $_COOKIE['sucesso'] ?></p>
+        <div class="alert alert-success text-center m-3" role="alert">
+            <?= $_COOKIE['sucesso'] ?>
+        </div>
         <?php setcookie('sucesso', '', time() - 3600, '/') ?>
     <?php endif; ?>
 </section>
