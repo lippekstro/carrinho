@@ -1,6 +1,22 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
 
+if (!isset($_COOKIE['modo'])) {
+    setcookie('modo', 'claro', time() + (30 * 30 * 30), '/');
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['claro'])) {
+        setcookie('modo', 'claro', time() + (3600 * 24 * 30), '/');
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
+    } elseif (isset($_POST['escuro'])) {
+        setcookie('modo', 'escuro', time() + (3600 * 24 * 30), '/');
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
+    }
+}
+
 $qtd = 0;
 if (isset($_COOKIE['carrinho'])) {
     foreach (unserialize($_COOKIE['carrinho']) as $p) {
@@ -11,7 +27,11 @@ if (isset($_COOKIE['carrinho'])) {
 
 
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<?php if ($_COOKIE['modo'] === 'claro') : ?>
+    <html lang="en">
+<?php else : ?>
+    <html lang="en" data-bs-theme="dark">
+<?php endif; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -64,6 +84,15 @@ if (isset($_COOKIE['carrinho'])) {
                     </div>
 
                     <div class="navbar-nav align-items-center">
+                        <?php if ($_COOKIE['modo'] === 'claro') : ?>
+                            <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="container-fluid justify-content-start">
+                                <button name="escuro" class="btn btn-sm btn-outline-secondary" type="submit"><i class="bi bi-moon-fill"></i></button>
+                            </form>
+                        <?php else : ?>
+                            <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="container-fluid justify-content-start">
+                                <button name="claro" class="btn btn-sm btn-outline-secondary" type="submit"><i class="bi bi-brightness-high-fill"></i></button>
+                            </form>
+                        <?php endif; ?>
                         <?php if (!isset($_SESSION['usuario'])) : ?>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/carrinho/views/login.php">Login<i class="bi bi-door-open-fill"></i></a>
