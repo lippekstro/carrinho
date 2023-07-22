@@ -1,5 +1,10 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
+
+if (isset($_SESSION['usuario'])) {
+    header('Location: /carrinho/index.php');
+    exit();
+}
 ?>
 
 

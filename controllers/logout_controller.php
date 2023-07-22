@@ -2,4 +2,4 @@
 session_start();
 session_unset();
 session_destroy();
-header('Location: /carrinho/index.php');
+header('Location: /carrinho/views/login.php');

@@ -38,11 +38,11 @@ if (isset($_COOKIE['carrinho'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
     <link rel="shortcut icon" href="/carrinho/img/your-logo_16.png" type="image/x-icon">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous" defer></script>
-
+    <!-- css bootstrap -->
+    <link rel="stylesheet" href="/carrinho/css/bootstrap.css">
+    <!-- js bootstrap -->
+    <script src="/carrinho/js/bootstrap.bundle.js" defer></script>
+    <!-- css personalizado -->
     <link rel="stylesheet" href="/carrinho/css/style.css">
 </head>
 
@@ -93,6 +93,7 @@ if (isset($_COOKIE['carrinho'])) {
                                 <button name="claro" class="btn btn-sm btn-outline-secondary" type="submit"><i class="bi bi-brightness-high-fill"></i></button>
                             </form>
                         <?php endif; ?>
+
                         <?php if (!isset($_SESSION['usuario'])) : ?>
                             <li class="nav-item" style="min-width: fit-content;">
                                 <a class="nav-link active" aria-current="page" href="/carrinho/views/login.php">Login<i class="bi bi-door-open-fill"></i></a>

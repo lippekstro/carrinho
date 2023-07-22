@@ -37,7 +37,8 @@ class Usuario
 
     public function criar()
     {
-        $query = "INSERT INTO usuario (nome_usuario, img_usuario, email, senha) VALUES (:nome_usuario, :img_usuario, :email, :senha)";
+        $query = "INSERT INTO usuario (nome_usuario, img_usuario, email, senha) 
+        VALUES (:nome_usuario, :img_usuario, :email, :senha)";
         $conexao = Conexao::conectar();
         $stmt = $conexao->prepare($query);
         $stmt->bindValue(':nome_usuario', $this->nome_usuario);
@@ -61,14 +62,12 @@ class Usuario
 
     public function editar()
     {
-        $query = "UPDATE usuario SET nome_usuario = :nome_usuario, img_usuario = :img_usuario, email = :email, senha = :senha, nv_acesso = :nv_acesso WHERE id_usuario = :id_usuario";
+        $query = "UPDATE usuario SET nome_usuario = :nome_usuario, email = :email 
+        WHERE id_usuario = :id_usuario";
         $conexao = Conexao::conectar();
         $stmt = $conexao->prepare($query);
         $stmt->bindValue(":nome_usuario", $this->nome_usuario);
-        $stmt->bindValue(":img_usuario", $this->img_usuario);
         $stmt->bindValue(":email", $this->email);
-        $stmt->bindValue(":senha", $this->senha);
-        $stmt->bindValue(":nv_acesso", $this->nv_acesso);
         $stmt->bindValue(":id_usuario", $this->id_usuario);
         $stmt->execute();
     }
