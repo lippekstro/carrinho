@@ -2,14 +2,23 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 ?>
 
-<section>
-    <?php if (isset($_COOKIE['erro'])) : ?>
-        <div class="alert alert-danger text-center m-3" role="alert">
-            <?= $_COOKIE['erro'] ?>
+<?php if (isset($_COOKIE['msg'])) : ?>
+    <?php if ($_COOKIE['tipo'] === 'sucesso') : ?>
+        <div class="alert alert-success text-center m-3" role="alert">
+            <?= $_COOKIE['msg'] ?>
         </div>
-        <?php setcookie('erro', '', time() - 3600, '/carrinho/') ?>
+    <?php elseif ($_COOKIE['tipo'] === 'perigo') : ?>
+        <div class="alert alert-danger text-center m-3" role="alert">
+            <?= $_COOKIE['msg'] ?>
+        </div>
+    <?php else : ?>
+        <div class="alert alert-info text-center m-3" role="alert">
+            <?= $_COOKIE['msg'] ?>
+        </div>
     <?php endif; ?>
-</section>
+    <?php setcookie('msg', '', time() - 3600, '/carrinho/') ?>
+    <?php setcookie('tipo', '', time() - 3600, '/carrinho/') ?>
+<?php endif; ?>
 
 <section class="d-flex align-items-center py-4">
     <div class="form-signin col-8 col-lg-4 m-auto">

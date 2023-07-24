@@ -1,12 +1,23 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/models/usuario.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/utils.php";
 session_start();
 
 try {
-    $nome = htmlspecialchars($_POST['nome']);
-    $email = htmlspecialchars($_POST['email']);
-    $senha = htmlspecialchars($_POST['senha']);
+    $nome = Utilidades::sanitizaString($_POST['nome']);
+    
+    if(Utilidades::validaEmail($_POST['email'])){
+        $email = Utilidades::sanitizaEmail($_POST['email']);
+    } else {
+        setcookie('msg', "Email inválido.", time() + 3600, '/carrinho/');
+        setcookie('tipo', 'perigo', time() + 3600, '/carrinho/');
+        header("Location: /carrinho/views/cadastro.php");
+        exit();
+    }
+    
+    $senha = $_POST['senha'];
     $senha = password_hash($senha, PASSWORD_DEFAULT);
+
     if (!empty($_FILES['imagem']['tmp_name'])) {
         $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
     }
@@ -30,7 +41,8 @@ try {
 
     // Verifica se o erro é de chave duplicada (email já cadastrado)
     if ($sqlStateCode === '23000' && strpos($errorMessage, 'Duplicate entry') !== false) {
-        setcookie('erro', "O email já foi cadastrado. Por favor, utilize outro email.", time() + 3600, '/carrinho/');
+        setcookie('msg', "O email já foi cadastrado. Por favor, utilize outro email.", time() + 3600, '/carrinho/');
+        setcookie('tipo', 'info', time() + 3600, '/carrinho/');
         header('Location: /carrinho/views/cadastro.php');
     } else {
         echo "Erro no banco de dados: " . $errorMessage;
