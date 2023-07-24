@@ -2,6 +2,15 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 ?>
 
+<section>
+    <?php if (isset($_COOKIE['erro'])) : ?>
+        <div class="alert alert-danger text-center m-3" role="alert">
+            <?= $_COOKIE['erro'] ?>
+        </div>
+        <?php setcookie('erro', '', time() - 3600, '/carrinho/') ?>
+    <?php endif; ?>
+</section>
+
 <section class="d-flex align-items-center py-4">
     <div class="form-signin col-8 col-lg-4 m-auto">
         <form action="/carrinho/controllers/cria_usuario_controller.php" method="POST" enctype="multipart/form-data">

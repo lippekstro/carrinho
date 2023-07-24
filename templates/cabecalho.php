@@ -2,16 +2,16 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
 
 if (!isset($_COOKIE['modo'])) {
-    setcookie('modo', 'claro', time() + (30 * 30 * 30), '/');
+    setcookie('modo', 'claro', time() + (30 * 30 * 30), '/carrinho/');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['claro'])) {
-        setcookie('modo', 'claro', time() + (3600 * 24 * 30), '/');
+        setcookie('modo', 'claro', time() + (3600 * 24 * 30), '/carrinho/');
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit;
     } elseif (isset($_POST['escuro'])) {
-        setcookie('modo', 'escuro', time() + (3600 * 24 * 30), '/');
+        setcookie('modo', 'escuro', time() + (3600 * 24 * 30), '/carrinho/');
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit;
     }
