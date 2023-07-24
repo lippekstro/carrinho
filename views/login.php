@@ -2,6 +2,8 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 
 if (isset($_SESSION['usuario'])) {
+    setcookie('msg', 'Você já está logado', time()+3600, '/carrinho/');
+    setcookie('tipo', 'info', time()+3600, '/carrinho/');
     header('Location: /carrinho/index.php');
     exit();
 }
