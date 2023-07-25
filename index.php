@@ -63,7 +63,10 @@ try {
         <div class="card m-3" style="width: 18rem;">
             <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode($p['img_produto']); ?>" class="card-img-top" alt="...">
             <div class="card-body">
-                <p class="card-text"><?= $p['nome_produto'] ?></p>
+                <div class="d-flex justify-content-between">
+                    <p class="card-text"><?= $p['nome_produto'] ?></p>
+                    <p class="card-text"><?= $p['nome_categoria'] ?></p>
+                </div>
                 <p class="card-text"><?= $p['preco'] ?>R$</p>
                 <a href="/carrinho/controllers/adicionar_item_controller.php?id=<?= $p['id_produto'] ?>" class="btn btn-primary">Carrinho</a>
             </div>

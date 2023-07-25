@@ -4,7 +4,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/utils.php";
 session_start();
 
 try {
-    $nome = Utilidades::sanitizaString($_POST['nome']);
+    $nome = $_POST['nome'];
     
     if(Utilidades::validaEmail($_POST['email'])){
         $email = Utilidades::sanitizaEmail($_POST['email']);

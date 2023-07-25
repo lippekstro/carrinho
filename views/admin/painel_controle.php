@@ -25,8 +25,18 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
         <i class="bi bi-plus-circle-fill m-1"></i>
     </a>
 
+    <a href="/carrinho/views/admin/cadastrar_categoria.php" class="btn btn-primary d-inline-flex align-items-center">
+        Adicionar Categoria
+        <i class="bi bi-plus-circle-fill m-1"></i>
+    </a>
+
     <a href="/carrinho/views/admin/listar_produto.php" class="btn btn-primary d-inline-flex align-items-center">
         Listar Produtos
+        <i class="bi bi-card-list m-1"></i>
+    </a>
+
+    <a href="/carrinho/views/admin/listar_categoria.php" class="btn btn-primary d-inline-flex align-items-center">
+        Listar Categorias
         <i class="bi bi-card-list m-1"></i>
     </a>
 

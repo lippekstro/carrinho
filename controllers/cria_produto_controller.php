@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/models/produto.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/utils.php";
 session_start();
 
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
@@ -10,8 +11,19 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
 }
 
 try {
-    $nome = htmlspecialchars($_POST['nome']);
-    $preco = htmlspecialchars($_POST['preco']);
+    $nome = Utilidades::sanitizaString($_POST['nome']);
+    
+    if(Utilidades::validaFloat($_POST['preco'])){
+        $preco = htmlspecialchars($_POST['preco']);
+    } else {
+        setcookie('msg', "Preço inválido.", time() + 3600, '/carrinho/');
+        setcookie('tipo', 'perigo', time() + 3600, '/carrinho/');
+        header("Location: /carrinho/views/admin/cadastrar_produto.php");
+        exit();
+    }
+
+    $categoria = htmlspecialchars($_POST['id_categoria']);
+    
     if (!empty($_FILES['imagem']['tmp_name'])) {
         $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
     }
@@ -19,6 +31,7 @@ try {
     $produto = new Produto();
     $produto->nome_produto = $nome;
     $produto->preco = $preco;
+    $produto->id_categoria = $categoria;
     if ($imagem) {
         $produto->img_produto = $imagem;
     }

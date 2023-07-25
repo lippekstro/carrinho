@@ -1,8 +1,9 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/models/categoria.php";
 
 if (!isset($_COOKIE['modo'])) {
-    setcookie('modo', 'claro', time() + (30 * 30 * 30), '/carrinho/');
+    setcookie('modo', 'claro', time() + (3600 * 24 * 30), '/carrinho/');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,6 +23,12 @@ if (isset($_COOKIE['carrinho'])) {
     foreach (unserialize($_COOKIE['carrinho']) as $p) {
         $qtd += $p['quantidade'];
     }
+}
+
+try {
+    $categorias = Categoria::listar();
+} catch (PDOException $e) {
+    echo $e->getMessage();
 }
 ?>
 
@@ -64,6 +71,18 @@ if (isset($_COOKIE['carrinho'])) {
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/carrinho/index.php">Inicio<i class="bi bi-house-fill"></i></a>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Produtos
+                            </a>
+                            <ul class="dropdown-menu">
+                                <?php foreach ($categorias as $c) : ?>
+                                    <li><a class="dropdown-item" href="/carrinho/views/produtos.php?id_cat=<?= $c['id_categoria'] ?>"><?= $c['nome_categoria'] ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/carrinho/views/carrinho.php">
                                 Carrinho

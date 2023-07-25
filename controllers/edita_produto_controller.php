@@ -13,6 +13,7 @@ try {
     $id_produto = htmlspecialchars($_POST['id']);
     $nome = htmlspecialchars($_POST['nome']);
     $preco = htmlspecialchars($_POST['preco']);
+    $categoria = htmlspecialchars($_POST['id_categoria']);
     if (!empty($_FILES['imagem']['tmp_name'])) {
         $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
     }
@@ -20,6 +21,7 @@ try {
     $produto = new Produto($id_produto);
     $produto->nome_produto = $nome;
     $produto->preco = $preco;
+    $produto->id_categoria = $categoria;
     if ($imagem) {
         $produto->img_produto = $imagem;
         $produto->editarImagem();

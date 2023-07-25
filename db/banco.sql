@@ -9,11 +9,18 @@ CREATE TABLE usuario (
     nv_acesso INT DEFAULT 1
 );
 
+CREATE TABLE categoria (
+    id_categoria INT PRIMARY KEY AUTO_INCREMENT,
+    nome_categoria VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE produto (
     id_produto INT PRIMARY KEY AUTO_INCREMENT,
     nome_produto VARCHAR(255) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
-    img_produto LONGBLOB
+    img_produto LONGBLOB,
+    id_categoria INT NOT NULL,
+    FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
 );
 
 CREATE TABLE carrinho (

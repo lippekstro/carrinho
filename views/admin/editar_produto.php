@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/models/produto.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/models/categoria.php';
 
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
     setcookie('msg', 'Você não tem permissão para acessar este conteúdo', time() + 3600, '/carrinho/');
@@ -11,6 +12,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
 
 try {
     $produto = new Produto($_GET['id']);
+    $categorias = Categoria::listar();
 } catch (Exception $e) {
     echo $e->getMessage();
 }
@@ -27,6 +29,14 @@ try {
                 <input type="text" class="form-control" id="floatingInput" placeholder="Nome" name="nome" value="<?= $produto->nome_produto ?>" required>
                 <label for="floatingInput">Nome</label>
             </div>
+
+            <select class="form-select" aria-label="Default select example" name="id_categoria">
+                <?php $categoria_anterior = $produto->id_categoria ?>
+                
+                <?php foreach($categorias as $c) : ?>
+                    <option value="<?= $c['id_categoria'] ?>" <?= $c['id_categoria'] == $categoria_anterior ? "selected" : "" ?>><?= $c['nome_categoria'] ?></option>
+                <?php endforeach; ?>
+            </select>
 
             <div class="form-floating my-3">
                 <input type="number" class="form-control" id="floatingInput" name="preco" step="0.01" value="<?= $produto->preco ?>" required>

@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/models/produto.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/models/categoria.php';
 
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
     setcookie('msg', 'Você não tem permissão para acessar este conteúdo', time() + 3600, '/carrinho/');
@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
 }
 
 try {
-    $produtos = Produto::listar();
+    $categorias = Categoria::listar();
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
@@ -29,22 +29,16 @@ try {
     <table class="table table-hover col col-lg-12">
         <thead>
             <tr>
-                <th scope="col">Imagens</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Preço</th>
                 <th scope="col" colspan="2"></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($produtos as $p) : ?>
+            <?php foreach ($categorias as $c) : ?>
                 <tr>
-                    <td class="col-4"><img src="data:image/jpg;charset=utf8;base64,<?= base64_encode($p['img_produto']); ?>" class="col-12" alt="..."></td>
-                    <td class="col-2"><?= $p['nome_produto'] ?></td>
-                    <td class="col-2"><?= $p['nome_categoria'] ?></td>
-                    <td class="col-2"><?= $p['preco'] ?>R$</td>
-                    <td class="col-2"><a href="/carrinho/views/admin/editar_produto.php?id=<?= $p['id_produto'] ?>">Editar</a></td>
-                    <td class="col-2"><a href="/carrinho/controllers/deleta_produto_controller.php?id=<?= $p['id_produto'] ?>">Deletar</a></td>
+                    <td class="col-2"><?= $c['nome_categoria'] ?></td>
+                    <td class="col-2"><a href="/carrinho/views/admin/editar_categoria.php?id=<?= $c['id_categoria'] ?>">Editar</a></td>
+                    <td class="col-2"><a href="/carrinho/controllers/deleta_categoria_controller.php?id=<?= $c['id_categoria'] ?>">Deletar</a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
