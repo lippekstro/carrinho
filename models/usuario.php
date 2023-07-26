@@ -104,7 +104,8 @@ class Usuario
 
             header("Location: /carrinho/index.php");
         } else {
-            setcookie('erro', 'Email/Senha incorretos', time() + 3600, '/');
+            setcookie('msg', 'Email/Senha incorretos', time() + 3600, '/carrinho/');
+            setcookie('tipo', 'perigo', time() + 3600, '/carrinho/');
             header('Location: /carrinho/views/login.php');
         }
     }
