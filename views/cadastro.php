@@ -1,4 +1,9 @@
 <?php
+if (isset($_COOKIE['msg'])){
+    setcookie('msg', '', time() - 3600, '/carrinho/');
+    setcookie('tipo', '', time() - 3600, '/carrinho/');
+}
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 ?>
 
@@ -16,8 +21,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
             <?= $_COOKIE['msg'] ?>
         </div>
     <?php endif; ?>
-    <?php setcookie('msg', '', time() - 3600, '/carrinho/') ?>
-    <?php setcookie('tipo', '', time() - 3600, '/carrinho/') ?>
 <?php endif; ?>
 
 <section class="d-flex align-items-center py-4">

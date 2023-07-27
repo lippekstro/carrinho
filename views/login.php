@@ -1,4 +1,9 @@
 <?php
+if (isset($_COOKIE['msg'])){
+    setcookie('msg', '', time() - 3600, '/carrinho/');
+    setcookie('tipo', '', time() - 3600, '/carrinho/');
+}
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 
 if (isset($_SESSION['usuario'])) {
@@ -26,8 +31,6 @@ if (isset($_SESSION['usuario'])) {
                     <?= $_COOKIE['msg'] ?>
                 </div>
             <?php endif; ?>
-            <?php setcookie('msg', '', time() - 3600, '/carrinho/') ?>
-            <?php setcookie('tipo', '', time() - 3600, '/carrinho/') ?>
         <?php endif; ?>
         
         <form action="/carrinho/controllers/login_controller.php" method="POST">
