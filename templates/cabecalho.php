@@ -43,6 +43,18 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    style-src 'self' cdn.jsdelivr.net 'unsafe-inline';
+    require-trusted-types-for 'script';
+    script-src 'self';
+    font-src 'self' cdn.jsdelivr.net;
+    img-src 'self' data:;
+    object-src 'none';
+    connect-src viacep.com.br
+    ">
+
     <title>Cart</title>
     <link rel="shortcut icon" href="/carrinho/img/your-logo_16.png" type="image/x-icon">
     <!-- css bootstrap -->
