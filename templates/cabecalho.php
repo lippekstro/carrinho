@@ -50,7 +50,7 @@ try {
     require-trusted-types-for 'script';
     script-src 'self';
     font-src 'self' cdn.jsdelivr.net;
-    img-src 'self' data:;
+    img-src 'self' data: source.unsplash.com images.unsplash.com;
     object-src 'none';
     connect-src viacep.com.br
     ">
@@ -75,11 +75,6 @@ try {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav align-items-center w-100 justify-content-between">
                     <div class="navbar-nav align-items-center">
-                        <?php if (isset($_SESSION['usuario'])) : ?>
-                            <li class="nav-item">
-                                <span>Bem Vindo, <?= $_SESSION['usuario']['nome'] ?></span>
-                            </li>
-                        <?php endif; ?>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/carrinho/index.php">Inicio<i class="bi bi-house-fill"></i></a>
                         </li>
@@ -116,13 +111,27 @@ try {
 
                     <div class="navbar-nav align-items-center">
                         <?php if ($_COOKIE['modo'] === 'claro') : ?>
-                            <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="container-fluid justify-content-start">
+                            <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="container-fluid justify-content-start" style="max-width: fit-content;">
                                 <button name="escuro" class="btn btn-sm btn-outline-secondary" type="submit"><i class="bi bi-moon-fill"></i></button>
                             </form>
                         <?php else : ?>
-                            <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="container-fluid justify-content-start">
+                            <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="container-fluid justify-content-start" style="max-width: fit-content;">
                                 <button name="claro" class="btn btn-sm btn-outline-secondary" type="submit"><i class="bi bi-brightness-high-fill"></i></button>
                             </form>
+                        <?php endif; ?>
+
+                        <?php if (isset($_SESSION['usuario'])) : ?>
+                            <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode($_SESSION['usuario']['img_usuario']); ?>" alt="" id="foto-perfil">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>Bem Vindo, <?= $_SESSION['usuario']['nome'] ?></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/carrinho/views/editar_perfil.php">Editar Perfil</a></li>
+                                    <li><a class="dropdown-item" href="/carrinho/views/editar_senha.php">Editar Senha</a></li>
+                                </ul>
+                            </li>
                         <?php endif; ?>
 
                         <?php if (!isset($_SESSION['usuario'])) : ?>

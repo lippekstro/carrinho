@@ -20,22 +20,22 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
 </section>
 
 <section class="d-flex justify-content-evenly flex-wrap m-3">
-    <a href="/carrinho/views/admin/cadastrar_produto.php" class="btn btn-primary d-inline-flex align-items-center">
+    <a href="/carrinho/views/admin/cadastrar_produto.php" class="btn btn-primary d-inline-flex align-items-center m-3">
         Adicionar Produto
         <i class="bi bi-plus-circle-fill m-1"></i>
     </a>
 
-    <a href="/carrinho/views/admin/cadastrar_categoria.php" class="btn btn-primary d-inline-flex align-items-center">
+    <a href="/carrinho/views/admin/cadastrar_categoria.php" class="btn btn-primary d-inline-flex align-items-center m-3">
         Adicionar Categoria
         <i class="bi bi-plus-circle-fill m-1"></i>
     </a>
 
-    <a href="/carrinho/views/admin/listar_produto.php" class="btn btn-primary d-inline-flex align-items-center">
+    <a href="/carrinho/views/admin/listar_produto.php" class="btn btn-primary d-inline-flex align-items-center m-3">
         Listar Produtos
         <i class="bi bi-card-list m-1"></i>
     </a>
 
-    <a href="/carrinho/views/admin/listar_categoria.php" class="btn btn-primary d-inline-flex align-items-center">
+    <a href="/carrinho/views/admin/listar_categoria.php" class="btn btn-primary d-inline-flex align-items-center m-3">
         Listar Categorias
         <i class="bi bi-card-list m-1"></i>
     </a>

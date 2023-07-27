@@ -18,6 +18,12 @@ footer {
     height: 3rem;
 }
 
+#foto-perfil {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
 @media only screen and (max-width: 600px) {
     main {
         padding-bottom: 7rem;

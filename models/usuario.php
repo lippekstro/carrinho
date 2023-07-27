@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/carrinho/db/conexao.php';
-session_start();
+require_once $_SERVER["DOCUMENT_ROOT"] . '/carrinho/configs/sessoes.php';
 
 class Usuario
 {
@@ -72,6 +72,30 @@ class Usuario
         $stmt->execute();
     }
 
+    public function editarFoto()
+    {
+        $query = "UPDATE usuario SET nome_usuario = :nome_usuario, email = :email, img_usuario = :img_usuario 
+        WHERE id_usuario = :id_usuario";
+        $conexao = Conexao::conectar();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(":nome_usuario", $this->nome_usuario);
+        $stmt->bindValue(":email", $this->email);
+        $stmt->bindValue(":img_usuario", $this->img_usuario);
+        $stmt->bindValue(":id_usuario", $this->id_usuario);
+        $stmt->execute();
+    }
+
+    public function editarSenha()
+    {
+        $query = "UPDATE usuario SET senha = :senha
+        WHERE id_usuario = :id_usuario";
+        $conexao = Conexao::conectar();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(":senha", $this->senha);
+        $stmt->bindValue(":id_usuario", $this->id_usuario);
+        $stmt->execute();
+    }
+
     public function deletar()
     {
         $query = "DELETE FROM usuario WHERE id_usuario = :id_usuario";
@@ -96,9 +120,11 @@ class Usuario
             session_start();
             session_regenerate_id();
 
+            $_SESSION['usuario']['id'] = $registro['id_usuario'];
             $_SESSION['usuario']['nome'] = $registro['nome_usuario'];
             $_SESSION['usuario']['email'] = $registro['email'];
             $_SESSION['usuario']['nv_acesso'] = $registro['nv_acesso'];
+            $_SESSION['usuario']['img_usuario'] = $registro['img_usuario'];
             $_SESSION['usuario']['inicio'] = time();
             $_SESSION['usuario']['expira'] = 900;
 
