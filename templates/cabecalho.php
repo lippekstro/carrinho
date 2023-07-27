@@ -112,11 +112,11 @@ try {
                     <div class="navbar-nav align-items-center">
                         <?php if ($_COOKIE['modo'] === 'claro') : ?>
                             <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="container-fluid justify-content-start" style="max-width: fit-content;">
-                                <button name="escuro" class="btn btn-sm btn-outline-secondary" type="submit"><i class="bi bi-moon-fill"></i></button>
+                                <button name="escuro" class="btn btn-sm btn-outline-secondary my-1" type="submit"><i class="bi bi-moon-fill"></i></button>
                             </form>
                         <?php else : ?>
                             <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="container-fluid justify-content-start" style="max-width: fit-content;">
-                                <button name="claro" class="btn btn-sm btn-outline-secondary" type="submit"><i class="bi bi-brightness-high-fill"></i></button>
+                                <button name="claro" class="btn btn-sm btn-outline-secondary my-1" type="submit"><i class="bi bi-brightness-high-fill"></i></button>
                             </form>
                         <?php endif; ?>
 

@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/models/usuario.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/utils.php";
-session_start();
+require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
 
 try {
     $nome = $_POST['nome'];

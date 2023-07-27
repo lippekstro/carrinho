@@ -17,11 +17,22 @@ try {
 ?>
 
 <section>
-    <?php if (isset($_COOKIE['sucesso'])) : ?>
-        <div class="alert alert-success text-center m-3" role="alert">
-            <?= $_COOKIE['sucesso'] ?>
-        </div>
-        <?php setcookie('sucesso', '', time() - 3600, '/') ?>
+    <?php if (isset($_COOKIE['msg'])) : ?>
+        <?php if ($_COOKIE['tipo'] === 'sucesso') : ?>
+            <div class="alert alert-success text-center m-3" role="alert">
+                <?= $_COOKIE['msg'] ?>
+            </div>
+        <?php elseif ($_COOKIE['tipo'] === 'perigo') : ?>
+            <div class="alert alert-danger text-center m-3" role="alert">
+                <?= $_COOKIE['msg'] ?>
+            </div>
+        <?php else : ?>
+            <div class="alert alert-info text-center m-3" role="alert">
+                <?= $_COOKIE['msg'] ?>
+            </div>
+        <?php endif; ?>
+        <?php setcookie('msg', '', time() - 3600, '/carrinho/') ?>
+        <?php setcookie('tipo', '', time() - 3600, '/carrinho/') ?>
     <?php endif; ?>
 </section>
 

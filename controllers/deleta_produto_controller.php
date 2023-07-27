@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/carrinho/models/produto.php';
-session_start();
+require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
 
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
     setcookie('msg', 'Você não tem permissão para acessar este conteúdo', time() + 3600, '/carrinho/');
@@ -16,8 +16,10 @@ try {
 
     $produto->deletar();
 
-    setcookie('sucesso', "O produto $produto->nome_produto foi deletado com sucesso", time() + 3600, '/');
+    setcookie('msg', "O produto $produto->nome_produto foi deletado com sucesso!", time() + 3600, '/carrinho/');
+    setcookie('tipo', 'sucesso', time() + 3600, '/carrinho/');
     header("Location: /carrinho/views/admin/listar_produto.php");
+    exit();
 } catch (Exception $e) {
     echo $e->getMessage();
 }

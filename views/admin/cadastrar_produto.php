@@ -46,7 +46,7 @@ try {
             </div>
 
             <select class="form-select" aria-label="Default select example" name="id_categoria">
-                <?php foreach($categorias as $c) : ?>
+                <?php foreach ($categorias as $c) : ?>
                     <option value="<?= $c['id_categoria'] ?>"><?= $c['nome_categoria'] ?></option>
                 <?php endforeach; ?>
             </select>

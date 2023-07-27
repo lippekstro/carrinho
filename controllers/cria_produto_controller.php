@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/models/produto.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/utils.php";
-session_start();
+require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
 
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
     setcookie('msg', 'Você não tem permissão para acessar este conteúdo', time() + 3600, '/carrinho/');
@@ -12,8 +12,8 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
 
 try {
     $nome = Utilidades::sanitizaString($_POST['nome']);
-    
-    if(Utilidades::validaFloat($_POST['preco'])){
+
+    if (Utilidades::validaFloat($_POST['preco'])) {
         $preco = htmlspecialchars($_POST['preco']);
     } else {
         setcookie('msg', "Preço inválido.", time() + 3600, '/carrinho/');
@@ -23,7 +23,7 @@ try {
     }
 
     $categoria = htmlspecialchars($_POST['id_categoria']);
-    
+
     if (!empty($_FILES['imagem']['tmp_name'])) {
         $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
     }
@@ -37,7 +37,8 @@ try {
     }
     $produto->criar();
 
-    setcookie('sucesso', "O produto $produto->nome_produto foi adicionado com sucesso", time() + 3600, '/');
+    setcookie('msg', "O produto $produto->nome_produto foi adicionado com sucessoo!", time() + 3600, '/carrinho/');
+    setcookie('tipo', 'sucesso', time() + 3600, '/carrinho/');
     header("Location: /carrinho/views/admin/painel_controle.php");
     exit();
 } catch (PDOException $e) {

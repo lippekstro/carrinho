@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/carrinho/models/categoria.php';
-session_start();
+require_once $_SERVER["DOCUMENT_ROOT"] . "/carrinho/configs/sessoes.php";
 
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['nv_acesso'] < 2) {
     setcookie('msg', 'Você não tem permissão para acessar este conteúdo', time() + 3600, '/carrinho/');
@@ -17,8 +17,10 @@ try {
     $categoria->nome_categoria = $nome;
     $categoria->editar();
 
-    setcookie('sucesso', "A categoria $categoria->nome_categoria foi atualizada com sucesso", time() + 3600, '/');
+    setcookie('msg', "A categoria $categoria->nome_categoria foi atualizada com sucesso!", time() + 3600, '/carrinho/');
+    setcookie('tipo', 'sucesso', time() + 3600, '/carrinho/');
     header("Location: /carrinho/views/admin/listar_categoria.php");
+    exit();
 } catch (PDOException $e) {
     echo $e->getMessage();
 }

@@ -129,10 +129,12 @@ class Usuario
             $_SESSION['usuario']['expira'] = 900;
 
             header("Location: /carrinho/index.php");
+            exit();
         } else {
             setcookie('msg', 'Email/Senha incorretos', time() + 3600, '/carrinho/');
             setcookie('tipo', 'perigo', time() + 3600, '/carrinho/');
             header('Location: /carrinho/views/login.php');
+            exit();
         }
     }
 }

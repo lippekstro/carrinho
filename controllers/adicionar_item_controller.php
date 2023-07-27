@@ -28,9 +28,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         }
 
         // Salva o carrinho como cookie
-        setcookie('carrinho', serialize($carrinho), time() + (86400 * 30), '/');
+        setcookie('carrinho', serialize($carrinho), time() + (86400 * 30), '/carrinho/');
 
-        setcookie('adicionado', "O produto foi adicionado ao carrinho com sucesso!", time() + 3600, '/');
+        setcookie('msg', "O produto foi adicionado ao carrinho com sucesso!", time() + 3600, '/carrinho/');
+        setcookie('tipo', 'sucesso', time() + 3600, '/carrinho/');
         header('Location: /carrinho/index.php');
         exit();
     }

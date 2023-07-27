@@ -2,6 +2,11 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/models/usuario.php';
 
+if (!isset($_SESSION['usuario'])) {
+    header('Location: /carrinho/views/login.php');
+    exit();
+}
+
 try {
     $usuario = new Usuario($_SESSION['usuario']['id']);
 } catch (PDOException $e) {
