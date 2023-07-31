@@ -1,13 +1,24 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/templates/cabecalho.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/models/produto.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/carrinho/configs/utils.php';
 
-try {
-    $id_categoria = $_GET['id_cat'];
-    $produtos = Produto::listarPorCategoria($id_categoria);
-} catch (PDOException $e) {
-    echo $e->getMessage();
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['termo'])) {
+    try {
+        $termo = Utilidades::sanitizaString($_GET['termo']);
+        $produtos = Produto::listarPorNome($termo);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+} else {
+    try {
+        $id_categoria = $_GET['id_cat'];
+        $produtos = Produto::listarPorCategoria($id_categoria);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
 }
+
 
 ?>
 

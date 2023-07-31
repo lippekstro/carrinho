@@ -34,10 +34,10 @@ try {
 
 
 <!DOCTYPE html>
-<?php if ($_COOKIE['modo'] === 'claro') : ?>
-    <html lang="en">
+<?php if (!isset($_COOKIE['modo']) || $_COOKIE['modo'] === 'claro') : ?>
+    <html lang="pt-BR">
 <?php else : ?>
-    <html lang="en" data-bs-theme="dark">
+    <html lang="pt-BR" data-bs-theme="dark">
 <?php endif; ?>
 
 <head>
@@ -110,7 +110,7 @@ try {
                     </div>
 
                     <div class="navbar-nav align-items-center">
-                        <?php if ($_COOKIE['modo'] === 'claro') : ?>
+                        <?php if (!isset($_COOKIE['modo']) || $_COOKIE['modo'] === 'claro') : ?>
                             <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="container-fluid justify-content-start" style="max-width: fit-content;">
                                 <button name="escuro" class="btn btn-sm btn-outline-secondary my-1" type="submit"><i class="bi bi-moon-fill"></i></button>
                             </form>

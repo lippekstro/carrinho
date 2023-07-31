@@ -39,7 +39,7 @@ class Categoria
 
     public static function listar()
     {
-        $query = "SELECT * FROM categoria";
+        $query = "SELECT * FROM categoria ORDER BY nome_categoria ASC";
         $conexao = Conexao::conectar();
         $stmt = $conexao->prepare($query);
         $stmt->execute();
