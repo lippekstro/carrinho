@@ -41,6 +41,16 @@ try {
         </div>
     </section>
 <?php else : ?>
+
+    <section class="m-3">
+        <div class="container-fluid col col-lg-6">
+            <form action="/carrinho/views/produtos.php" class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Encontre Produtos" name="termo" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+    </section>
+
     <div class="d-flex justify-content-center m-3">
         <div id="carouselExampleCaptions" class="carousel slide col col-lg-6">
             <div class="carousel-indicators">

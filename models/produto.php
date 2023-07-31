@@ -69,12 +69,25 @@ class Produto
         return $lista;
     }
 
-    public static function listarPorCategoria($categoria){
+    public static function listarPorCategoria($categoria)
+    {
         $query = "SELECT p.*, c.nome_categoria FROM produto p
         JOIN categoria c ON p.id_categoria = c.id_categoria WHERE p.id_categoria = :id_categoria";
         $conexao = Conexao::conectar();
         $stmt = $conexao->prepare($query);
         $stmt->bindValue(':id_categoria', $categoria);
+        $stmt->execute();
+        $lista = $stmt->fetchAll();
+        return $lista;
+    }
+
+    public static function listarPorNome($termo)
+    {
+        $query = "SELECT p.*, c.nome_categoria FROM produto p
+        JOIN categoria c ON p.id_categoria = c.id_categoria WHERE p.nome_produto LIKE :termo";
+        $conexao = Conexao::conectar();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':termo', "%" . $termo . "%");
         $stmt->execute();
         $lista = $stmt->fetchAll();
         return $lista;
