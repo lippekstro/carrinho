@@ -18,9 +18,11 @@ $total = 0;
 ?>
 
 <?php if (!isset($_COOKIE['carrinho'])) : ?>
-    <div class="d-flex justify-content-center m-3">
-        <p>Nenhum Item no Carrinho</p>
-    </div>
+    <section>
+        <div class="alert alert-success text-center m-3" role="alert">
+            Nenhum Item no Carrinho.
+        </div>
+    </section>
 <?php else : ?>
     <div class="container">
         <main>
